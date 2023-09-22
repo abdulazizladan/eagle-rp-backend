@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty } from "class-validator";
 export class UpdateUserDTO {
 
     @IsNotEmpty()
-    @ApiProperty()
+    @ApiProperty({readOnly: true})
     id: string;
 
     @IsEmail()

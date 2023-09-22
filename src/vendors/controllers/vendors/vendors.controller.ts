@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { VendorsService } from './vendors.service';
-import { CreateVendorDto } from './dto/create-vendor.dto';
-import { UpdateVendorDto } from './dto/update-vendor.dto';
+import { VendorsService } from '../../services/vendors/vendors.service';
+import { CreateVendorDto } from '../../dto/create-vendor.dto';
+import { UpdateVendorDto } from '../../dto/update-vendor.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Vendors')
@@ -42,7 +42,7 @@ export class VendorsController {
   })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateVendorDto: UpdateVendorDto) {
-    return this.vendorsService.update(+id, updateVendorDto);
+    return this.vendorsService.update(id, updateVendorDto);
   }
 
   @ApiOperation({

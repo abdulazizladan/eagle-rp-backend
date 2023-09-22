@@ -14,7 +14,7 @@ export class AuthController {
     /**
      * 
      * @param dto 
-     * @returns JWT
+     * @returns a generated JSON Web Token to be stored and used as header in authanticating user
      */
     @ApiOperation({
         summary: "User login",

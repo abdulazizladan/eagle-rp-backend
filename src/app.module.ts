@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { organizationModule } from './organization/organization.module';
 import { DocumentManagementModule } from './document-management/document-management.module';
 import { EventsModule } from './events/events.module';
+import { AssetsManagementModule } from './assets-management/assets-management.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { EventsModule } from './events/events.module';
     AuthModule, 
     UserManagementModule, 
     StaffManagementModule, 
-    VendorsModule, organizationModule, DocumentManagementModule, EventsModule
+    VendorsModule, organizationModule, DocumentManagementModule, EventsModule, AssetsManagementModule
   ],
   controllers: [AppController],
   providers: [AppService],

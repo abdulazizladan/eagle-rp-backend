@@ -7,7 +7,12 @@ export class UserLoginCredentials {
         {
             default: "",
             required: true,
-            description: "user email"
+            description: "user email",
+            example: "xxx@xxx.com",
+            format: "********",
+            type: "string",
+            name: "email",
+
         }
     )
     @IsEmail({})
@@ -17,7 +22,10 @@ export class UserLoginCredentials {
         {
             default: "",
             required: true,
-            description: "user password"
+            description: "user password",
+            example: "********",
+            type: "string",
+            format: "********"
         }
     )
     password: string;

@@ -3,8 +3,9 @@ import { User } from '../../models/user.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/user-management/entities/User.entity';
 import { Repository } from 'typeorm';
-import { Observable, catchError, from, of, toArray } from 'rxjs';
+import { Observable, catchError, from, map, of, tap, toArray } from 'rxjs';
 import { UpdateUserDTO } from 'src/user-management/dto/update-user.dto';
+import { UserView } from 'src/user-management/entities/views/user.view';
 
 @Injectable()
 export class UserService {
@@ -22,8 +23,16 @@ export class UserService {
      * @returns User[]
      */
     getAll(): Observable<UserEntity[]> {
-        const users = this.userRepository.find();
-        return from(users).pipe();
+        return from(
+            this.userRepository.find()
+        ).pipe(
+            map((users) => {
+                if(users.length === 0){
+                    throw new NotFoundException("No users found.")
+                }
+                return users;
+            })
+        )
     }
 
     /**
@@ -32,10 +41,16 @@ export class UserService {
      * @returns A single user with unque ID
      */
     getById(id: string): Observable<UserEntity> {
-        const searchID = id;
-        const user = this.userRepository.findOne({where: {id : searchID}});
-        if(!user) throw new NotFoundException();
-        return from(user);
+        return from(
+            this.userRepository.findOne({where: {id: id}})
+        ).pipe(
+            tap((user) => {
+                if(!user) {
+                    throw new NotFoundException("User not found")
+                }
+            }
+            )
+        )
     }
 
     /**
@@ -46,7 +61,7 @@ export class UserService {
     async add( user: User ): Promise<UserEntity> {
         const exists = await this.userRepository.findOne({where: {email: user.email}});
         if(exists){
-            throw new ConflictException()
+            throw new ConflictException(`User with email : ${user.email} already exists`)
         }
         const newUser = new UserEntity();
         newUser.id = user.id;
@@ -67,10 +82,12 @@ export class UserService {
     */
     async update(id: string, user: UpdateUserDTO): Promise<UserEntity> {
         const searchID = id;
+        const userUpdate = user;
         const userToUpdate: UserEntity = await this.userRepository.findOne({where: {id : searchID}});
         if(!userToUpdate) throw new NotFoundException();
         userToUpdate.firstName = user.firstName;
-        return //this.userRepository.update(userToUpdate)
+        this.userRepository.update(id, {...userUpdate, dateLastEdited: Date.now()});
+        return await userToUpdate;
     }
 
     /**

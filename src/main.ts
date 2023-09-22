@@ -8,9 +8,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Eagle RP')
-    .setDescription('An integrated resource planner')
+    .setDescription('An integrated resource planner for organizations.')
     .setVersion('1.0')
-   //.addTag('Planning')
+    .setContact("Abdulaziz Ladan", "eagle-rp.dem.web.app", "abdulazizladan@gmail.com")
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

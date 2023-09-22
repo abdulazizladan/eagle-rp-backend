@@ -24,4 +24,10 @@ export class UserEntity {
 
     @Column({nullable: false, type: "text", comment: "", name: "password", })
     password: string;
+
+    @Column({default: Date.now})
+    dateCreated: Date;
+
+    @Column({nullable: true})
+    dateLastEdited: Date;
 }

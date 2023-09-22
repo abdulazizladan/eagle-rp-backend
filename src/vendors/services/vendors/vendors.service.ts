@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateVendorDto } from './dto/create-vendor.dto';
-import { UpdateVendorDto } from './dto/update-vendor.dto';
+import { CreateVendorDto } from '../../dto/create-vendor.dto';
+import { UpdateVendorDto } from '../../dto/update-vendor.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { VendorEntity } from './entities/vendor.entity';
+import { VendorEntity } from '../../entities/vendor.entity';
 import { Repository } from 'typeorm';
 import { Observable, from } from 'rxjs';
 
@@ -40,8 +40,10 @@ export class VendorsService {
     return from(vendor).pipe();
   }
 
-  update(id: number, updateVendorDto: UpdateVendorDto) {
-    return `This action updates a #${id} vendor`;
+  async update(id: string, updateVendorDto: UpdateVendorDto) {
+    const vendor = this.vendorRepository.findOne({where: {id: id}})
+    //await this.vendorRepository.update(updateVendorDto)
+
   }
 
   remove(id: number) {

@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Patch, Delete, Param, Body } from '@nestjs/common';
 import { User } from '../../models/user.model';
 import { UserService } from 'src/user-management/services/user/user.service';
-import { ApiConflictResponse, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiConflictResponse, ApiCreatedResponse, ApiFoundResponse, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateUserDTO } from 'src/user-management/dto/create-user.dto';
 import { UpdateUserDTO } from 'src/user-management/dto/update-user.dto';
+import { UserEntity } from 'src/user-management/entities/User.entity';
 
 @ApiTags("Users")
 @Controller("user")
@@ -17,7 +18,7 @@ export class UserController {
      * 
      * @returns an observable that emits a list of users
      */
-    @ApiOkResponse({description: "Success"})
+    @ApiOkResponse({type: User, description: "Users list retrieved successfully."})
     @ApiNotFoundResponse({description: "No users found."})
     @ApiOperation({
         summary: "Get all users",
@@ -39,10 +40,15 @@ export class UserController {
         description: "Get a single user by ID",
         tags: ["users"]
     })
-    @ApiNoContentResponse({
+    @Get(":id")
+    @ApiNotFoundResponse({
+        type: "string",
         description: "No user found"
     })
-    @Get(":id")
+    @ApiFoundResponse({
+        type: User,
+        description: "User found"
+    })
     getByID(@Param('id') id: string) {
         const getID = id;
         return this.userService.getById(getID);
@@ -59,9 +65,11 @@ export class UserController {
         tags: ["users"]
     })
     @ApiConflictResponse({
+        type: "string",
         description: "User with that Id already exists."
     })
     @Post("")
+    @ApiCreatedResponse({type: User, description: "User added successfully"})
     add( @Body() dto: CreateUserDTO) {
         const newUser = dto;
         return this.userService.add(newUser)
@@ -79,6 +87,7 @@ export class UserController {
         tags: ["users"]
     }) 
     @Patch(":id")
+    @ApiOkResponse({type: User, description: "Update successful"})
     update(@Param("id") id: string, @Body() user: UpdateUserDTO) {
         const searchID = id;
         const newUser = user;
