@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { MembershipEntity } from "./membership.entity";
 import { BiodataEntity } from "./biodata.entity";
+import { EmploymentEntity } from "./employment.entity";
 
 @Entity({name: "Staff", synchronize: true})
 export class StaffEntity {
@@ -24,4 +25,7 @@ export class StaffEntity {
 
     @OneToMany(type => MembershipEntity, membership => membership.staff)
     memberships: MembershipEntity[];
+
+    @OneToMany(type => EmploymentEntity, employment => employment.staff)
+    employment: EmploymentEntity;
 }

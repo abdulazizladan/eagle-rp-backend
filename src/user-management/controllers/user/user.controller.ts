@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Patch, Delete, Param, Body } from '@nestjs/common';
 import { User } from '../../models/user.model';
 import { UserService } from 'src/user-management/services/user/user.service';
-import { ApiConflictResponse, ApiCreatedResponse, ApiFoundResponse, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiConflictResponse, ApiCreatedResponse, ApiFoundResponse, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { CreateUserDTO } from 'src/user-management/dto/create-user.dto';
 import { UpdateUserDTO } from 'src/user-management/dto/update-user.dto';
 import { UserEntity } from 'src/user-management/entities/User.entity';
@@ -18,7 +18,12 @@ export class UserController {
      * 
      * @returns an observable that emits a list of users
      */
-    @ApiOkResponse({type: User, description: "Users list retrieved successfully."})
+    @ApiOkResponse(
+        {
+            type: User, 
+            isArray: true,
+            description: "Users list retrieved successfully."
+        })
     @ApiNotFoundResponse({description: "No users found."})
     @ApiOperation({
         summary: "Get all users",
@@ -105,6 +110,8 @@ export class UserController {
         tags: ["users"]
     })
     @Delete(":id")
+    @ApiNotFoundResponse({description: "User not found"})
+    @ApiOkResponse({type: User, description: "User deleted successfully"})
     delete(@Param("id") id: string) {
         const deleteID = id;
         return this.userService.delete(deleteID)

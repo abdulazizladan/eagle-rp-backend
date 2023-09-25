@@ -19,7 +19,7 @@ export class UserEntity {
     @Column({nullable: false, type: "text"})
     lastName: string;
 
-    @Column({name: "status", nullable: true, default: Status.actice})
+    @Column({name: "status", nullable: true, default: Status.active})
     status: Status;
 
     @Column({nullable: false, type: "text", comment: "", name: "password", })

@@ -10,6 +10,7 @@ import { organizationModule } from './organization/organization.module';
 import { DocumentManagementModule } from './document-management/document-management.module';
 import { EventsModule } from './events/events.module';
 import { AssetsManagementModule } from './assets-management/assets-management.module';
+import { SalesManagementModule } from './sales-management/sales-management.module';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { AssetsManagementModule } from './assets-management/assets-management.mo
     AuthModule, 
     UserManagementModule, 
     StaffManagementModule, 
-    VendorsModule, organizationModule, DocumentManagementModule, EventsModule, AssetsManagementModule
+    VendorsModule, organizationModule, DocumentManagementModule, EventsModule, AssetsManagementModule, SalesManagementModule
   ],
   controllers: [AppController],
   providers: [AppService],

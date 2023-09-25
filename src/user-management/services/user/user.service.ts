@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { Observable, catchError, from, map, of, tap, toArray } from 'rxjs';
 import { UpdateUserDTO } from 'src/user-management/dto/update-user.dto';
 import { UserView } from 'src/user-management/entities/views/user.view';
+import { Status } from 'src/user-management/enums/status.enum';
 
 @Injectable()
 export class UserService {
@@ -85,8 +86,24 @@ export class UserService {
         const userUpdate = user;
         const userToUpdate: UserEntity = await this.userRepository.findOne({where: {id : searchID}});
         if(!userToUpdate) throw new NotFoundException();
-        userToUpdate.firstName = user.firstName;
-        this.userRepository.update(id, {...userUpdate, dateLastEdited: Date.now()});
+        if(user.email != ""){ userToUpdate.email = user.email};
+        if(user.firstName != ""){ userToUpdate.firstName = user.firstName};
+        if(user.middleName != ""){ userToUpdate.middleName = user.middleName};
+        if(user.lastName != ""){ userToUpdate.lastName = user.lastName};
+        if(user.password != ""){ userToUpdate.password = user.password};
+        if(user.status == "active"){
+            userToUpdate.status = Status.active
+        }else if(user.status =="suspended") {
+            userToUpdate.status = Status.suspended
+        }else {
+            userToUpdate.status = Status.deleted
+        }
+        this.userRepository.update(id, 
+            {
+                ...userUpdate, 
+                status: Status.active,
+                dateLastEdited: Date.now(),
+            });
         return await userToUpdate;
     }
 

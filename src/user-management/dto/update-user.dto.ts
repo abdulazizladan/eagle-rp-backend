@@ -21,5 +21,8 @@ export class UpdateUserDTO {
     lastName: string;
 
     @ApiProperty()
+    status: string;
+
+    @ApiProperty()
     password: string
 }

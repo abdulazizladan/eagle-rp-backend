@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
 import { Gender } from "../enums/gender.enum";
 import { StaffEntity } from "./staff.entity";
 
-@Entity()
+@Entity({name: "biodata"})
 export class BiodataEntity {
 
     @PrimaryColumn()

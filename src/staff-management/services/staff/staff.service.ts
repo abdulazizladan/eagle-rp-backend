@@ -28,8 +28,8 @@ export class StaffService {
       */
      getByID(id: string): Observable<StaffEntity> {
           const searchID = id;
-          const staff = this.staffRepository.findOne({where: {id: searchID}, relations: ["biodata"]});
-          if(!staff) throw new NotFoundException("No user with that ID");
+          const staff = this.staffRepository.findOne({where: {id: searchID}, relations: ["biodata", "employment"]});
+          if(!staff) throw new NotFoundException("No staff with that ID");
           return from(staff).pipe();
      }
 
