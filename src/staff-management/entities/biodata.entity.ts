@@ -5,16 +5,16 @@ import { StaffEntity } from "./staff.entity";
 @Entity({name: "biodata"})
 export class BiodataEntity {
 
-    @PrimaryColumn()
+    @PrimaryColumn({})
     id: string;
 
-    @Column()
+    @Column({})
     dateOfBirth: Date;
 
     @Column({})
     gender: string;
 
     @OneToOne(() => StaffEntity, (staff) => staff.biodata)
-    @JoinColumn()
+    @JoinColumn({})
     staff: StaffEntity;
 }
