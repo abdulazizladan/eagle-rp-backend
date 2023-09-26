@@ -23,7 +23,12 @@ import { SalesManagementModule } from './sales-management/sales-management.modul
     AuthModule, 
     UserManagementModule, 
     StaffManagementModule, 
-    VendorsModule, organizationModule, DocumentManagementModule, EventsModule, AssetsManagementModule, SalesManagementModule
+    VendorsModule, 
+    organizationModule, 
+    DocumentManagementModule, 
+    EventsModule, 
+    AssetsManagementModule, 
+    SalesManagementModule
   ],
   controllers: [AppController],
   providers: [AppService],

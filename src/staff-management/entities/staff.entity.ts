@@ -2,6 +2,9 @@ import { Column, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { MembershipEntity } from "./membership.entity";
 import { BiodataEntity } from "./biodata.entity";
 import { EmploymentEntity } from "./employment.entity";
+import { EducationEntity } from "./education.entity";
+import { TrainingEntity } from "./training.entity";
+import { CertificationEntity } from "./certification.entity";
 
 @Entity({name: "Staff", synchronize: true})
 export class StaffEntity {
@@ -28,4 +31,15 @@ export class StaffEntity {
 
     @OneToMany(type => EmploymentEntity, employment => employment.staff)
     employment: EmploymentEntity;
+
+    @OneToMany(type => EducationEntity, education => education.staff)
+    education: EducationEntity;
+
+    @OneToMany(type => TrainingEntity, training => training.staff)
+    training: TrainingEntity
+
+    @OneToMany(type => CertificationEntity, certification => certification.staff)
+    certifications: CertificationEntity
+
+
 }

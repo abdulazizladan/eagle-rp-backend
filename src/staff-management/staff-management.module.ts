@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StaffEntity } from './entities/staff.entity';
 import { MembershipEntity } from './entities/membership.entity';
 import { EmploymentEntity } from './entities/employment.entity';
+import { EducationEntity } from './entities/education.entity';
+import { CertificationEntity } from './entities/certification.entity';
+import { TrainingEntity } from './entities/training.entity';
 
 @Module({
   providers: [
@@ -18,7 +21,10 @@ import { EmploymentEntity } from './entities/employment.entity';
       [
         StaffEntity, 
         EmploymentEntity,
-        MembershipEntity
+        MembershipEntity,
+        EducationEntity,
+        CertificationEntity,
+        TrainingEntity
       ]
     )
   ]

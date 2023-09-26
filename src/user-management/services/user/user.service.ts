@@ -29,7 +29,7 @@ export class UserService {
         ).pipe(
             map((users) => {
                 if(users.length === 0){
-                    throw new NotFoundException("No users found.")
+                    throw new NotFoundException("No users found.");
                 }
                 return users;
             })

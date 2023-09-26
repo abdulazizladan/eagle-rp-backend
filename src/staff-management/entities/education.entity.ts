@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { StaffEntity } from "./staff.entity";
 
 @Entity({name: "Education"})
 export class EducationEntity {
@@ -17,5 +18,8 @@ export class EducationEntity {
 
     @Column({})
     certification: string;
+
+    @ManyToOne(type => StaffEntity, staff => staff.education)
+    staff: StaffEntity;
 
 }
