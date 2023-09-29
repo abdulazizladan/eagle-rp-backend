@@ -16,6 +16,7 @@ import { VehicleEntity } from './entities/vehicle.entity';
 import { VehiclesController } from './controllers/vehicles/vehicles.controller';
 import { MachineryEntity } from './entities/machinery.entity';
 import { LocationEntity } from './entities/location.entity';
+import { BuildingsController } from './controllers/buildings/buildings.controller';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { LocationEntity } from './entities/location.entity';
       LocationEntity
     ])
   ],
-  controllers: [AssetsController, VehiclesController],
+  controllers: [AssetsController, VehiclesController, BuildingsController],
   providers: [
     AssetsService, 
     SitesService, 

@@ -1,5 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { UserLoginCredentials } from 'src/auth/dto/userLoginCredentials.dto';
+import { UserEntity } from 'src/user-management/entities/User.entity';
+import { Repository } from 'typeorm';
 //import { JwtStrategy } from 'src/auth/strategy/jwt-strategy/jwt-strategy.service';
 
 @Injectable()
@@ -18,4 +21,6 @@ export class AuthService {
         const payload = this.jwtService.validate(token);
         return payload;
     }**/
+
+    //constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 }

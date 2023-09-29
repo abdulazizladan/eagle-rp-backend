@@ -11,8 +11,8 @@ export class AssetsController {
     }
 
     @ApiOperation({
-        description: "Get overll stats on organization's assets",
-        summary: "Get overll stats on organization's assets"
+        description: "Get overall stats on organization's assets",
+        summary: "Get overall stats on organization's assets"
     })
     @Get()
     getStats() {

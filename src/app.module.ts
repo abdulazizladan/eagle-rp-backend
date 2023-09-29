@@ -11,6 +11,8 @@ import { DocumentManagementModule } from './document-management/document-managem
 import { EventsModule } from './events/events.module';
 import { AssetsManagementModule } from './assets-management/assets-management.module';
 import { SalesManagementModule } from './sales-management/sales-management.module';
+import { GatewayModule } from './gateway/gateway.module';
+import { ProjectManagementModule } from './project-management/project-management.module';
 
 @Module({
   imports: [
@@ -28,7 +30,8 @@ import { SalesManagementModule } from './sales-management/sales-management.modul
     DocumentManagementModule, 
     EventsModule, 
     AssetsManagementModule, 
-    SalesManagementModule
+    SalesManagementModule, 
+    GatewayModule, ProjectManagementModule
   ],
   controllers: [AppController],
   providers: [AppService],
